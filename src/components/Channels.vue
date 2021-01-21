@@ -4,7 +4,7 @@
 		<div class="channels__list">
 			<div 
 				class="channel"
-				v-for="(channel, index) in data.channelDetails.slice(0, loadItems)"
+				v-for="(channel, index) in data.channelDetails.slice(0, range)"
 				:key="index"
 				@mouseover="showDescription"
 			>
@@ -29,8 +29,8 @@
 export default {
 	data() {
 		return {
-			loadItems: 24,
-			isUpdated: true,
+			range: 24,
+			amountLoad: 12
 		}
 	},
 	methods: {
@@ -38,7 +38,7 @@ export default {
 			event.target.src = "https://on-desktop.com/images/wp.php?path=/wps/Creative_Wallpaper_Empty_channel_016564_.jpg&wp=";
 		},
 		loadMore() {
-			this.loadItems += 12;
+			this.range += this.amountLoad;
 		},
 		showDescription() {
 			
