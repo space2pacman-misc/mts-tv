@@ -44,9 +44,6 @@ export default {
 			
 		}
 	},
-	updated() {
-		//console.log(this.data.channelDetails[0])
-	},
 	props: {
 		data: Object
 	}
@@ -86,6 +83,7 @@ export default {
 .channel:hover {
 	transform: translateY(-7px);
 	border-color: #BA9D5A;
+	z-index: 1;
 }
 
 .channel__description {
