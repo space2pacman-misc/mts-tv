@@ -2,16 +2,18 @@
 	<div class="dropdown">
 		<div class="dropdown__button" :class="{ 'dropdown__button--active': isOpen }" @click="changeState">{{ title }}</div>
 		<div class="dropdown__list" v-if="isOpen">
-			<div 
-				v-for="(item, index) in list"
-				:key="index"
-				class="dropdown__item"
-				:class="{ 'dropdown__item--active': item === active }"
-				@click="onSelect(item)"
-			>
-				{{ item }}
+			<div class="dropdown__items">
+				<div 
+					v-for="(item, index) in list"
+					:key="index"
+					class="dropdown__item"
+					:class="{ 'dropdown__item--active': item === active }"
+					@click="onSelect(item)"
+				>
+					{{ item }}
+				</div>
 			</div>
-			<div class="dropdown__item dropdown__reset" @click="onReset">Сбросить выбор</div>
+			<div class="dropdown__reset" @click="onReset">Сбросить выбор</div>
 		</div>
 	</div>
 </template>
@@ -70,13 +72,17 @@ export default {
 
 .dropdown__list {
 	position: absolute;
-	overflow: hidden;
 	background: #fff;
 	margin-top: 6px;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	border-radius: 5px;
 	width: 100%;
 	z-index: 2;
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.dropdown__items {
+	
 	max-height: 200px;
 	overflow: auto;
 }
@@ -101,5 +107,10 @@ export default {
 	font-size: 14px;
 	color: #C1D2E9;
 	padding: 10px 0px 10px 0px;
+	cursor: pointer;
+}
+
+.dropdown__reset:hover {
+	background: #233345;
 }
 </style>

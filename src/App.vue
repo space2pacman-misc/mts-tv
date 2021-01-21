@@ -120,9 +120,11 @@ export default {
 			}
 		},
 		onSortReset() {
-
+			this.dropdownList.sort.value = "По умолчанию";
+			this.data.channels.list = JSON.parse(JSON.stringify(this.data.channels.raw));
 		},
 		onChannelReset() {
+			this.dropdownList.channels.value = "Все телеканалы";
 			this.data.channels.list.channelDetails = this.data.channels.raw.channelDetails.slice();
 		},
 		onTabSelected(name) {
