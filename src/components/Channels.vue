@@ -38,7 +38,7 @@ export default {
 			event.target.src = "https://on-desktop.com/images/wp.php?path=/wps/Creative_Wallpaper_Empty_channel_016564_.jpg&wp=";
 		},
 		loadMore() {
-			this.loadItems += 6;
+			this.loadItems += 12;
 		},
 		showDescription() {
 			
