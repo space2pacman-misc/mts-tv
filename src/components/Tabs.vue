@@ -56,4 +56,11 @@ export default {
 .tab--active:hover {
 	color: #fff;
 }
+
+@media (max-width: 1280px){
+	.tabs {
+		margin-bottom: 20px;
+		width: 100%;
+	}
+}
 </style>

@@ -177,6 +177,7 @@ body {
 }
 
 .background {
+	min-width: 320px;
 	background: linear-gradient(180deg, rgba(92, 127, 227, 0) 12.76%, rgba(92, 127, 227, 0.2) 54.97%, rgba(211, 251, 244, 0) 75.49%), linear-gradient(90deg, #001424 0%, #001424 0.01%, rgba(30, 76, 104, 0.49) 50.22%, #001424 100%), rgba(35, 51, 69, 0.25);
 }
 
@@ -202,5 +203,22 @@ body {
 	color: rgba(232, 249, 255, 0.4);
 	text-align: center;
 	margin-top: 50px;
+}
+
+@media (max-width: 1280px){
+	.app {
+		width: 768px;
+	}
+
+	.navbar {
+		display: block;
+	}
+}
+
+@media (max-width: 768px){
+	.app {
+		width: 320px;
+		padding: 52px 0px 100px 0px;
+	}
 }
 </style>

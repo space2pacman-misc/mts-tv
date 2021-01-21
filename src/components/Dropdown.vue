@@ -133,4 +133,20 @@ export default {
 .dropdown__reset:hover {
 	background: #233345;
 }
+
+@media (max-width: 1280px){
+	.dropdown {
+		margin-left: 0;
+		width: 50%;
+		margin-right: 18px;
+	}
+
+	.dropdown:last-child {
+		margin-right: 0px;
+	}
+
+	.dropdown__button {
+		width: 100%;
+	}
+}
 </style>

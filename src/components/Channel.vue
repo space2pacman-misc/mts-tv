@@ -105,4 +105,19 @@ export default {
 	width: 100%;
 	height: 100%;
 }
+
+@media (max-width: 1280px){
+	.channel {
+		width: 120px;
+		height: 76px;
+	}
+}
+
+@media (max-width: 768px) {
+	.channel {
+		width: 155px;
+		height: 90px;
+		margin-bottom: 12px;
+	}
+}
 </style>
