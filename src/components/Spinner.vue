@@ -14,7 +14,7 @@
 <style scoped>
 .spinner {
 	text-align: center;
-    margin-top: 20px;
+	margin-top: 20px;
 }
 
 .spinner__box * {
