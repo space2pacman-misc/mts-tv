@@ -80,6 +80,15 @@ export default {
 				return [];
 			}
 		},
+		saveLocalStorage(key, value) {
+			localStorage[key] = value;
+		},
+		loadLocalStorage(key) {
+			return localStorage[key];
+		},
+		clearLocalStorage(key) {
+			delete localStorage[key];
+		},
 		request(url) {
 			return fetch(`${window.location.href}/${url}`).then(response => {
 				return response.json();
@@ -90,6 +99,7 @@ export default {
 
 			if(value === "По умолчанию") {
 				this.data.channels.list = JSON.parse(JSON.stringify(this.data.channels.raw));
+				this.clearLocalStorage("sort");
 			} else {
 				this.data.channels.list.channelDetails.sort((a, b) => {
 					if(value === "По возрастанию") {
@@ -102,6 +112,8 @@ export default {
 						if(a.name < b.name) return 1;
 					}
 				})
+
+				this.saveLocalStorage("sort", value);
 			}
 		},
 		onChannelSelected(value) {
@@ -109,6 +121,7 @@ export default {
 
 			if(value === "Все телеканалы") {
 				this.data.channels.list.channelDetails = this.data.channels.raw.channelDetails.slice();
+				this.clearLocalStorage("channels");
 			} else {
 				this.data.channels.list.channelDetails = this.data.channels.raw.channelDetails.filter(channel => {
 					if(channel.genres) {
@@ -117,15 +130,19 @@ export default {
 						return false;
 					}
 				})
+
+				this.saveLocalStorage("channels", value);
 			}
 		},
 		onSortReset() {
 			this.dropdownList.sort.value = "По умолчанию";
 			this.data.channels.list = JSON.parse(JSON.stringify(this.data.channels.raw));
+			this.clearLocalStorage("sort");
 		},
 		onChannelReset() {
 			this.dropdownList.channels.value = "Все телеканалы";
 			this.data.channels.list.channelDetails = this.data.channels.raw.channelDetails.slice();
+			this.clearLocalStorage("channels");
 		},
 		onTabSelected(name) {
 			this.tabs.active = name;
@@ -137,6 +154,18 @@ export default {
 			this.data.channels.list = JSON.parse(JSON.stringify(response));
 			this.dropdownList.channels.list = this.getGenres(this.data.channels.list);
 			this.dropdownList.channels.list.unshift(...this.dropdownList.channels.default);
+
+			let sort = this.loadLocalStorage("sort");
+			let channels = this.loadLocalStorage("channels");
+
+			if(channels) {
+				this.onChannelSelected(channels);
+			}
+			
+			if(sort) {
+				this.onSortSelected(sort);
+			}
+
 		})
 	},
 	components: {
