@@ -1,6 +1,6 @@
 <template>
 	<div v-if="data" class="channels">
-		<div class="channels__title">{{ data.total }} каналов</div>
+		<div class="channels__title">{{ data.channelDetails.length }} каналов</div>
 		<div class="channels__list">
 			<div 
 				class="channel"
