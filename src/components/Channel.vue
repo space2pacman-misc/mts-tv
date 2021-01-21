@@ -117,13 +117,25 @@ export default {
 		width: 120px;
 		height: 76px;
 	}
+
+	.channel__description {
+		left: 100px;
+		top: 55px;
+	}
 }
 
 @media (max-width: 768px) {
 	.channel {
-		width: 155px;
-		height: 90px;
+		width: 138px;
+		height: 85px;
 		margin-bottom: 12px;
 	}
+
+	.channel__description {
+		left: 125px;
+		top: 65px;
+	}
 }
+
+    
 </style>

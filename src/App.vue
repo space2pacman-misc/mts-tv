@@ -161,7 +161,7 @@ export default {
 			if(channels) {
 				this.onChannelSelected(channels);
 			}
-			
+
 			if(sort) {
 				this.onSortSelected(sort);
 			}
@@ -245,9 +245,13 @@ body {
 }
 
 @media (max-width: 768px){
+	#app {
+		overflow: hidden;
+	}
+
 	.app {
 		width: 320px;
-		padding: 52px 0px 100px 0px;
+		padding: 52px 15px 100px 15px;
 	}
 }
 </style>
