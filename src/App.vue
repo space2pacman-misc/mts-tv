@@ -3,8 +3,8 @@
 		<div class="navbar">
 			<Tabs :tabs="tabs.list" :active="tabs.active" @onSelected="onTabSelected" />
 			<div class="dropdowns">
-				<Dropdown title="Сортировка" :list="dropdownList.sort.list" @onSelected="onSortSelected" @onReset="onSortReset" />
-				<Dropdown title="Телеканалы" :list="getGenres(data.channels)" @onSelected="onChannelSelected" @onReset="onChannelReset" />
+				<Dropdown title="Сортировка" :list="dropdownList.sort.list" :active="dropdownList.sort.value" @onSelected="onSortSelected" @onReset="onSortReset" />
+				<Dropdown title="Телеканалы" :list="getGenres(data.channels)" :active="dropdownList.channels.value" @onSelected="onChannelSelected" @onReset="onChannelReset" />
 			</div>
 		</div>
 
@@ -35,11 +35,11 @@ export default {
 			dropdownList: {
 				sort: {
 					list: ["По умолчанию", "По возрастанию", "По убыванию"],
-					value: ""
+					value: "По умолчанию"
 				},
 				channels: {
 					list: ["Все телеканалы"],
-					value: ""
+					value: "Все телеканалы"
 				}
 			},
 			tabs: {

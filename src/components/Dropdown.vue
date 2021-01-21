@@ -6,6 +6,7 @@
 				v-for="(item, index) in list"
 				:key="index"
 				class="dropdown__item"
+				:class="{ 'dropdown__item--active': item === active }"
 				@click="onSelect(item)"
 			>
 				{{ item }}
@@ -19,7 +20,7 @@
 export default {
 	data() {
 		return {
-			isOpen: false
+			isOpen: false,
 		}
 	},
 	methods: {
@@ -37,7 +38,8 @@ export default {
 	},
 	props: {
 		title: String,
-		list: Array
+		list: Array,
+		active: String
 	}
 }
 </script>
@@ -83,6 +85,10 @@ export default {
 	padding: 10px 0px 10px 18px;
 	font-size: 15px;
 	cursor: pointer;
+}
+
+.dropdown__item--active {
+	background: #BA9D5A;
 }
 
 .dropdown__item:hover {
