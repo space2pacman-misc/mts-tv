@@ -62,12 +62,32 @@ export default {
 	cursor: pointer;
 	border-radius: 5px;
 	color: #fff;
+	position: relative;
+}
+
+.dropdown__button:after {
+	content: "";
+	display: block;
+	background: url("~@/assets/icons/arrow-black.svg") no-repeat;
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	right: 12px;
+	top: 8px;
+	transform: rotate(90deg);
+	background-size: 100%;
 }
 
 .dropdown__button--active {
 	border-radius: 0px 0px 5px 5px;
 	border-color: #BA9D5A;
 	color: #BA9D5A;
+}
+
+.dropdown__button--active:after {
+	background: url("~@/assets/icons/arrow-brown.svg") no-repeat;
+	transform: rotate(270deg);
+	background-size: 100%;
 }
 
 .dropdown__list {
