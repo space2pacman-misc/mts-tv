@@ -11,7 +11,7 @@
 				<img class="channel__img" :src="channel.picture.backgrounds[0]" @error="onErrorBackground($event)">
 				<div class="channel__description">
 					<div class="channel__description-title">{{ channel.name }}</div>
-					<img class="channel__description-icon" :src="channel.picture.channelPics[0]" @error="onErrorIcon($event)" />
+					<img class="channel__description-icon" :src="channel.picture.channelBlackWhites[0]" @error="onErrorIcon($event)" />
 					<div class="channel__description-text">{{ channel.introduce }}</div>
 				</div>
 			</div>

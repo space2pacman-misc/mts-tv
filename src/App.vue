@@ -178,7 +178,6 @@ body {
 }
 
 .app {
-	overflow: hidden;
 	width: 1280px;
 	margin: 0 auto;
 	padding: 52px 100px 100px 140px;
