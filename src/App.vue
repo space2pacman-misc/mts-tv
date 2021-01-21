@@ -122,7 +122,7 @@ export default {
 
 		},
 		onChannelReset() {
-
+			this.data.channels.list.channelDetails = this.data.channels.raw.channelDetails.slice();
 		},
 		onTabSelected(name) {
 			this.tabs.active = name;
