@@ -1,6 +1,6 @@
 <template>
 	<div class="channel">
-		<img v-show="isLoad" class="channel__img" :src="channel.picture.backgrounds[0]" @load="onLoadImage" @error="onErrorBackground($event)">
+		<img v-show="isLoad" class="channel__img" :src="src" @load="onLoadImage" @error="onErrorBackground($event)">
 		<Spinner v-show="!isLoad" />
 		<div class="channel__description">
 			<div class="channel__description-title">{{ channel.name }}</div>
@@ -22,7 +22,10 @@ export default {
 	},
 	watch: {
 		channel() {
-			this.isLoad = false;
+			if(this.src !== this.channel.picture.backgrounds[0]) {
+				this.src = this.channel.picture.backgrounds[0];
+				this.isLoad = false;
+			}
 		}
 	},
 	methods: {
@@ -35,6 +38,9 @@ export default {
 		onLoadImage() {
 			this.isLoad = true;
 		}
+	},
+	mounted() {
+		this.src = this.channel.picture.backgrounds[0];
 	},
 	props: {
 		channel: Object
