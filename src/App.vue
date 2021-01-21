@@ -23,10 +23,6 @@ import First from "@/components/First";
 import Second from "@/components/Second";
 import Channels from "@/components/Channels";
 
-//test
-import channelsData from "@/assets/channels.json";
-//
-
 export default {
 	name: "App",
 	data() {
@@ -84,11 +80,16 @@ export default {
 				return [];
 			}
 		},
+		request(url) {
+			return fetch(`${window.location.href}/${url}`).then(response => {
+				return response.json();
+			});
+		},
 		onSortSelected(value) {
 			this.dropdownList.sort.value = value;
 
 			if(value === "По умолчанию") {
-				this.data.channels.list = channelsData;
+				this.data.channels.list = JSON.parse(JSON.stringify(this.data.channels.raw));
 			} else {
 				this.data.channels.list.channelDetails.sort((a, b) => {
 					if(value === "По возрастанию") {
@@ -129,12 +130,12 @@ export default {
 		}
 	},
 	mounted() {
-		//test
-		this.data.channels.raw = JSON.parse(JSON.stringify(channelsData));
-		this.data.channels.list = JSON.parse(JSON.stringify(channelsData));
-		this.dropdownList.channels.list = this.getGenres(this.data.channels.list);
-		this.dropdownList.channels.list.unshift(...this.dropdownList.channels.default);
-		//
+		this.request("channels.json").then(response => {
+			this.data.channels.raw = JSON.parse(JSON.stringify(response));
+			this.data.channels.list = JSON.parse(JSON.stringify(response));
+			this.dropdownList.channels.list = this.getGenres(this.data.channels.list);
+			this.dropdownList.channels.list.unshift(...this.dropdownList.channels.default);
+		})
 	},
 	components: {
 		Tabs,
