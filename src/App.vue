@@ -1,16 +1,18 @@
 <template>
-	<div id="app" class="app">
-		<div class="navbar">
-			<Tabs :tabs="tabs.list" :active="tabs.active" @onSelected="onTabSelected" />
-			<div class="dropdowns">
-				<Dropdown title="Сортировка" :list="dropdownList.sort.list" :active="dropdownList.sort.value" @onSelected="onSortSelected" @onReset="onSortReset" />
-				<Dropdown title="Телеканалы" :list="getGenres(data.channels)" :active="dropdownList.channels.value" @onSelected="onChannelSelected" @onReset="onChannelReset" />
+	<div id="app" class="background">
+		<div class="app">
+			<div class="navbar">
+				<Tabs :tabs="tabs.list" :active="tabs.active" @onSelected="onTabSelected" />
+				<div class="dropdowns">
+					<Dropdown title="Сортировка" :list="dropdownList.sort.list" :active="dropdownList.sort.value" @onSelected="onSortSelected" @onReset="onSortReset" />
+					<Dropdown title="Телеканалы" :list="getGenres(data.channels)" :active="dropdownList.channels.value" @onSelected="onChannelSelected" @onReset="onChannelReset" />
+				</div>
 			</div>
-		</div>
 
-		<First v-if="tabs.active === 'First'" />
-		<Second v-if="tabs.active === 'Second'" />
-		<Channels v-if="tabs.active === 'Телеканалы'" :data="data.channels" />
+			<First v-if="tabs.active === 'First'" />
+			<Second v-if="tabs.active === 'Second'" />
+			<Channels v-if="tabs.active === 'Телеканалы'" :data="data.channels" />
+		</div>
 	</div>
 </template>
 
@@ -154,8 +156,11 @@ body {
 	font-family: "Roboto";
 }
 
-.app {
+.background {
 	background: linear-gradient(180deg, rgba(92, 127, 227, 0) 12.76%, rgba(92, 127, 227, 0.2) 54.97%, rgba(211, 251, 244, 0) 75.49%), linear-gradient(90deg, #001424 0%, #001424 0.01%, rgba(30, 76, 104, 0.49) 50.22%, #001424 100%), rgba(35, 51, 69, 0.25);
+}
+
+.app {
 	width: 1280px;
 	margin: 0 auto;
 	padding: 52px 100px 100px 140px;
