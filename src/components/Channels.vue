@@ -8,10 +8,10 @@
 				:key="index"
 				@mouseover="showDescription"
 			>
-				<img class="channel__img" :src="channel.picture.backgrounds[0]" @error="onErrorImage($event)">
+				<img class="channel__img" :src="channel.picture.backgrounds[0]" @error="onErrorBackground($event)">
 				<div class="channel__description">
 					<div class="channel__description-title">{{ channel.name }}</div>
-					<img class="channel__description-icon" :src="channel.picture.channelPics[0]" />
+					<img class="channel__description-icon" :src="channel.picture.channelPics[0]" @error="onErrorIcon($event)" />
 					<div class="channel__description-text">{{ channel.introduce }}</div>
 				</div>
 			</div>
@@ -34,8 +34,11 @@ export default {
 		}
 	},
 	methods: {
-		onErrorImage(event) {
+		onErrorBackground(event) {
 			event.target.src = "https://on-desktop.com/images/wp.php?path=/wps/Creative_Wallpaper_Empty_channel_016564_.jpg&wp=";
+		},
+		onErrorIcon(event) {
+			event.target.remove();
 		},
 		loadMore() {
 			this.range += this.amountLoad;
@@ -119,6 +122,7 @@ export default {
 	color: #fff;
 	font-size: 12px;
 	line-height: 16px;
+	margin-top: 15px;
 }
 
 .channel__img {
