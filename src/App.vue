@@ -5,13 +5,13 @@
 				<Tabs :tabs="tabs.list" :active="tabs.active" @onSelected="onTabSelected" />
 				<div class="dropdowns">
 					<Dropdown title="Сортировка" :list="dropdownList.sort.list" :active="dropdownList.sort.value" @onSelected="onSortSelected" @onReset="onSortReset" />
-					<Dropdown title="Телеканалы" :list="getGenres(data.channels)" :active="dropdownList.channels.value" @onSelected="onChannelSelected" @onReset="onChannelReset" />
+					<Dropdown title="Телеканалы" :list="dropdownList.channels.list" :active="dropdownList.channels.value" @onSelected="onChannelSelected" @onReset="onChannelReset" />
 				</div>
 			</div>
 
 			<First v-if="tabs.active === 'First'" />
 			<Second v-if="tabs.active === 'Second'" />
-			<Channels v-if="tabs.active === 'Телеканалы'" :data="data.channels" />
+			<Channels v-if="tabs.active === 'Телеканалы'" :data="data.channels.list" />
 		</div>
 	</div>
 </template>
@@ -32,7 +32,10 @@ export default {
 	data() {
 		return {
 			data: {
-				channels: null
+				channels: {
+					list: null,
+					raw: null
+				}
 			},
 			dropdownList: {
 				sort: {
@@ -40,7 +43,8 @@ export default {
 					value: "По умолчанию"
 				},
 				channels: {
-					list: ["Все телеканалы"],
+					list: [],
+					default: ["Все телеканалы"],
 					value: "Все телеканалы"
 				}
 			},
@@ -75,8 +79,6 @@ export default {
 					}
 				}).flat();
 
-				result.unshift("Все телеканалы");
-
 				return Array.from(new Set(result));
 			} else {
 				return [];
@@ -86,9 +88,9 @@ export default {
 			this.dropdownList.sort.value = value;
 
 			if(value === "По умолчанию") {
-				this.data.channels = channelsData;
+				this.data.channels.list = channelsData;
 			} else {
-				this.data.channels.channelDetails.sort((a, b) => {
+				this.data.channels.list.channelDetails.sort((a, b) => {
 					if(value === "По возрастанию") {
 						if(a.name > b.name) return 1;
 						if(a.name < b.name) return -1;
@@ -103,6 +105,18 @@ export default {
 		},
 		onChannelSelected(value) {
 			this.dropdownList.channels.value = value;
+
+			if(value === "Все телеканалы") {
+				this.data.channels.list.channelDetails = this.data.channels.raw.channelDetails.slice();
+			} else {
+				this.data.channels.list.channelDetails = this.data.channels.raw.channelDetails.filter(channel => {
+					if(channel.genres) {
+						return channel.genres.find(genre => genre.genreName === value)
+					} else {
+						return false;
+					}
+				})
+			}
 		},
 		onSortReset() {
 
@@ -116,7 +130,10 @@ export default {
 	},
 	mounted() {
 		//test
-		this.data.channels = channelsData;
+		this.data.channels.raw = JSON.parse(JSON.stringify(channelsData));
+		this.data.channels.list = JSON.parse(JSON.stringify(channelsData));
+		this.dropdownList.channels.list = this.getGenres(this.data.channels.list);
+		this.dropdownList.channels.list.unshift(...this.dropdownList.channels.default);
 		//
 	},
 	components: {
